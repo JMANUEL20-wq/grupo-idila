@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+:root {
+  --idila-primary: #0E4937;
+  --idila-primary-2: #1B5E48;
+  --idila-secondary: #5C7568;
+  --idila-brand: #6A8F73;
+  --idila-brand-soft: #EAF0EA;
+  --idila-gold: #B8862E;
+  --idila-bg: #F4F6F5;
+  --idila-border: #E1E7E3;
+  --idila-ink: #1B221E;
+  --idila-rust: #B5602E;
+}
+
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body {
+  margin: 0;
+  background: var(--idila-bg);
+  color: #17211d;
+  font-family: Arial, Helvetica, sans-serif;
+}
+button, input, textarea, select { font: inherit; }
+
+@layer utilities {
+  .idila-card {
+    border: 1px solid var(--idila-border);
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(31,77,61,.06);
+  }
+  .idila-button {
+    border-radius: 10px;
+    background: var(--idila-primary);
+    color: white;
+    padding: .7rem 1rem;
+    font-weight: 700;
+  }
+  .idila-button:hover { opacity: .92; }
+
+  /* --- Landing: identidad "plano técnico" --- */
+  .idila-blueprint {
+    background-image:
+      linear-gradient(rgba(31,77,61,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(31,77,61,.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  .idila-crosshair { position: absolute; width: 20px; height: 20px; pointer-events: none; }
+  .idila-crosshair::before,
+  .idila-crosshair::after { content: ""; position: absolute; background: var(--idila-secondary); }
+  .idila-crosshair::before { top: 50%; left: 0; width: 100%; height: 1px; transform: translateY(-50%); }
+  .idila-crosshair::after { left: 50%; top: 0; height: 100%; width: 1px; transform: translateX(-50%); }
+
+  .idila-stamp {
+    border: 2px solid var(--idila-rust);
+    color: var(--idila-rust);
+    transform: rotate(-8deg);
+  }
+
+  .idila-ticket { position: relative; }
+  .idila-ticket-tear {
+    position: relative;
+    border-top: 2px dashed var(--idila-border);
+  }
+  .idila-ticket-tear::before,
+  .idila-ticket-tear::after {
+    content: "";
+    position: absolute;
+    top: -8px;
+    width: 16px; height: 16px;
+    background: var(--idila-bg);
+    border-radius: 999px;
+  }
+  .idila-ticket-tear::before { left: -24px; }
+  .idila-ticket-tear::after { right: -24px; }
+
+  .idila-node-line {
+    background: repeating-linear-gradient(90deg, var(--idila-secondary) 0 8px, transparent 8px 15px);
+    height: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .idila-pulse { animation: idila-pulse 2.6s ease-in-out infinite; }
+}
+@keyframes idila-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+@layer utilities {
+  .idila-input {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--idila-border);
+    background: white;
+    padding: .65rem .8rem;
+  }
+  .idila-input:focus { outline: 2px solid var(--idila-secondary); outline-offset: 1px; }
+  .idila-label {
+    display: block;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--idila-secondary);
+    margin-bottom: .35rem;
+  }
+  .idila-button-ghost {
+    border-radius: 10px;
+    border: 1px solid var(--idila-border);
+    background: white;
+    padding: .65rem .9rem;
+    font-weight: 600;
+    color: var(--idila-ink);
+  }
+  .idila-button-ghost:hover { background: var(--idila-bg); }
+  .idila-button-danger {
+    border-radius: 10px;
+    background: #b3261e;
+    color: white;
+    padding: .65rem .9rem;
+    font-weight: 700;
+  }
+  .idila-button-danger:hover { opacity: .9; }
+
+  .idila-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    border-radius: 999px;
+    padding: .25rem .65rem;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+    border: 1px solid transparent;
+  }
+  .idila-badge-proceso { background: #FEF3E6; color: #9A5B10; border-color: #F3DCB4; }
+  .idila-badge-terminado { background: var(--idila-brand-soft); color: var(--idila-brand); border-color: #CFE3D6; }
+  .idila-badge-entregado { background: #EAF0F8; color: #2a4d8f; border-color: #CFDCF0; }
+  .idila-badge-borrador { background: #EEF0F2; color: #555; border-color: #DCE0E4; }
+  .idila-badge-enviada { background: #EEF1FB; color: #3c4fb8; border-color: #d6dcf7; }
+  .idila-badge-aceptada { background: var(--idila-brand-soft); color: var(--idila-brand); border-color: #CFE3D6; }
+  .idila-badge-rechazada { background: #FBEAEA; color: #a3312a; border-color: #f2cfcd; }
+  .idila-badge-admin { background: #F5EBD8; color: var(--idila-gold); border-color: #EAD8AF; }
+
+  .idila-shell { min-height: 100vh; display: flex; }
+  .idila-sidebar {
+    width: 232px;
+    flex-shrink: 0;
+    background: var(--idila-primary);
+    color: white;
+    display: flex;
+    flex-direction: column;
+  }
+  .idila-nav-link {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .65rem .9rem;
+    border-radius: 10px;
+    color: rgba(255,255,255,.78);
+    font-weight: 600;
+    font-size: .9rem;
+  }
+  .idila-nav-link:hover { background: rgba(255,255,255,.08); color: white; }
+  .idila-nav-link.active { background: rgba(255,255,255,.14); color: white; }
+
+  .idila-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  .idila-table th {
+    text-align: left;
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--idila-secondary);
+    padding: .6rem .75rem;
+    border-bottom: 1px solid var(--idila-border);
+  }
+  .idila-table td { padding: .7rem .75rem; border-bottom: 1px solid var(--idila-border); vertical-align: top; }
+  .idila-table tr:last-child td { border-bottom: none; }
+}
+
+@layer utilities {
+  .idila-hero {
+    background: linear-gradient(135deg, var(--idila-primary) 0%, var(--idila-primary-2) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .idila-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .idila-kpi { padding: 1rem 1.1rem; }
+  .idila-delta {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 5px;
+  }
+  .idila-delta-up { background: var(--idila-brand-soft); color: var(--idila-brand); }
+  .idila-delta-down { background: #FBEAEA; color: #B3261E; }
+  .idila-minibar { display: flex; align-items: flex-end; gap: 4px; height: 46px; }
+  .idila-minibar > div { flex: 1; border-radius: 3px 3px 0 0; }
+  .idila-section-label {
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    color: var(--idila-primary);
+    margin-bottom: .6rem;
+  }
+}
